@@ -10,7 +10,7 @@ const SECRET = process.env.SECRET
 const SONGS_DIR = 'songs/'
 
 const songs = {
-    list: ['nothing'],
+    list: [],
     add(x) {
         let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o tmp.mp3`
         let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}${x}.mp3`
@@ -32,10 +32,11 @@ const songs = {
                     console.log(`stderr: ${stderr}`)
                 }
                 console.log(`stdout: ${stdout}`)
+                unlink('tmp.mp3')
                 this.list.push(x)
                 if (this.list.length > 2) {
                     let oldest = this.list.shift()
-                    unlink(SONGS_DIR + oldest, (error) => {
+                    unlink(`${SONGS_DIR}${oldest}.mp3`, (error) => {
                         if (error) console.log(`error 29: ${error.message}`)
                     })
                 }
@@ -43,7 +44,10 @@ const songs = {
         })
     },
     latest() {
-        return this.list[this.list.length - 1]
+        if (this.list.length == 0)
+            return 'nothing'
+        else
+            return `${SONGS_DIR}${this.list[this.list.length - 1]}.mp3`
     }
 }
 

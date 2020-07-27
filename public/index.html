@@ -20,8 +20,9 @@
         <script lang="javascript">
             var state = "nothing"
             function load() {
-                var request = new XMLHttpRequest();
-                request.open('GET', 'latest', true);
+                console.log("loading...")
+                var request = new XMLHttpRequest()
+                request.open('GET', 'latest', true)
                 request.onload = function() {
                     if (this.status != 200) {
                         console.log("error 27")
@@ -32,7 +33,8 @@
                         let song = document.getElementById("song")
                         let source = document.getElementById("source")
                         let loading = document.getElementById("loading")
-                        source.setAttribute("src", `songs/${state}.m4a`)
+                        source.setAttribute("src", state)
+                        song.load()
                         song.play()
                         song.onended = () => {
                             song.className = "hidden"
@@ -42,7 +44,7 @@
                         song.className = ""
                         loading.className = "hidden"
                     } else {
-                        setTimeout(load, 10000);
+                        setTimeout(load, 1000);
                     }
                 }
                 request.onerror = function() {
@@ -54,8 +56,8 @@
                 load();
             });
         </script>
-        <div id="loading">Loading</div>
-        <audio id="song" class="hidden" controls>
+        <div id="loading">Waiting for a song</div>
+        <audio id="song" class="hidden" autoplay controls>
             <source id="source" src="" type="audio/mpeg">
         </audio>
     </body>
