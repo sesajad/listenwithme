@@ -40,8 +40,9 @@ const songs = {
 app.get('/healthz', (req, res) => res.send('Still Alive!'))
 
 app.get('/inform', (req, res) => {
-    if (req.get['token'] == SECRET) {
-        songs.add(req.get['id'])
+    if (req.query.secret == SECRET) {
+        songs.add(req.query.id)
+        res.send('ok')
     } else {
         res.status(403)
         res.send('you are a lier')
@@ -50,4 +51,4 @@ app.get('/inform', (req, res) => {
 app.get('/latest', (req, res) => res.send(songs.latest()))
 app.use('/', express.static('public'))
 app.use('/songs', express.static('songs'))
-app.listen(port, () => console.log(`app is listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`app is listening at http://localhost:${port} with secret "${secret}"`))
