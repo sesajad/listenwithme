@@ -13,7 +13,7 @@ ADD package.json /app/
 ADD package-lock.json /app/
 RUN npm i
 
-ADD songs /app/songs
+RUN mkdir songs
 ADD public /app/public
 ADD src /app/src
 
