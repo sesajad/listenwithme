@@ -12,7 +12,7 @@ const SONGS_DIR = 'songs/'
 const songs = {
     list: ['nothing'],
     add(x) {
-        let cmd = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o ${x}.mp3`
+        let cmd = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o ${SONGS_DIR}/${x}.mp3`
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error 17: ${error.message}`)
