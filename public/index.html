@@ -21,7 +21,7 @@
             var state = "nothing"
             function load() {
                 console.log("loading...")
-                var request = new XMLHttpRequest()
+                let request = new XMLHttpRequest()
                 request.open('GET', 'latest', true)
                 request.onload = function() {
                     if (this.status != 200) {
@@ -36,7 +36,7 @@
                         source.setAttribute("src", state)
                         song.load()
                         song.play()
-                        song.onended = () => {
+                        song.onended = function() {
                             song.className = "hidden"
                             loading.className = ""
                             load()
