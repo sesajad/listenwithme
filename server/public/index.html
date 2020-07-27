@@ -44,16 +44,16 @@
                         song.className = ""
                         loading.className = "hidden"
                     } else {
-                        setTimeout(load, 1000);
+                        setTimeout(load, 1000)
                     }
                 }
                 request.onerror = function() {
-                    console.log("error 45");
+                    console.log("error 45")
                 }
-                request.send();
+                request.send()
             }
             document.addEventListener("DOMContentLoaded", function(event) { 
-                load();
+                load()
             });
         </script>
         <div id="loading">Waiting for a song</div>

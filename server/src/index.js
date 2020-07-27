@@ -12,7 +12,7 @@ const SONGS_DIR = 'songs/'
 const songs = {
     list: [],
     add(x) {
-        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o tmp.mp3`
+        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 ${x} -o tmp.mp3`
         let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}${x}.mp3`
         exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
@@ -32,7 +32,9 @@ const songs = {
                     console.log(`stderr: ${stderr}`)
                 }
                 console.log(`stdout: ${stdout}`)
-                unlink('tmp.mp3')
+                unlink('tmp.mp3', (error) => {
+                    if (error) console.log(`error 36: ${error.message}`)
+                })
                 this.list.push(x)
                 if (this.list.length > 2) {
                     let oldest = this.list.shift()

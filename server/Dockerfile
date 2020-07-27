@@ -3,7 +3,7 @@ FROM alpine
 # youtube-dl
 RUN apk add -q --progress --update --no-cache ffmpeg python3 py-pip
 RUN pip install --upgrade pip
-RUN pip install youtube_dl
+RUN pip install youtube-dl
 
 # nodejs
 RUN apk add -q --progress --update npm

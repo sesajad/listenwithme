@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Listen with me",
+  "version": "1.0",
+  
+  "description": "You are the DJ",
+
+  "icons": {
+  },
+
+  "permissions": [
+    "*://*.youtube.com/*",
+    "webRequest",
+    "webNavigation",
+    "tabs",
+    "storage"
+  ],
+
+  "browser_action": {
+    "default_title": "LWM",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+        "id": "listen-with-me@sesajad.me",
+        "strict_min_version": "57.0a1"
+    }
+}  
+}
