@@ -12,24 +12,35 @@ const SONGS_DIR = 'songs/'
 const songs = {
     list: ['nothing'],
     add(x) {
-        let cmd = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o ${SONGS_DIR}/${x}.mp3`
-        exec(cmd, (error, stdout, stderr) => {
+        let cmd_1 = `youtube-dl -i --extract-audio --audio-format m4a --audio-quality 0 "${x}" -o tmp.mp3`
+        let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}/${x}.mp3`
+        exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
-                console.log(`error 17: ${error.message}`)
+                console.log(`error 19: ${error.message}`)
                 return
             }
             if (stderr) {
                 console.log(`stderr: ${stderr}`)
                 return
             }
-            console.log(`stdout: ${stdout}`)
-            this.list.push(x)
-            if (this.list.length > 2) {
-                let oldest = this.list.shift()
-                unlink(SONGS_DIR + oldest, (error) => {
-                    if (error) console.log(`error 29: ${error.message}`)
-                })
-            }
+            exec(cmd_2, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error 17: ${error.message}`)
+                    return
+                }
+                if (stderr) {
+                    console.log(`stderr: ${stderr}`)
+                    return
+                }
+                console.log(`stdout: ${stdout}`)
+                this.list.push(x)
+                if (this.list.length > 2) {
+                    let oldest = this.list.shift()
+                    unlink(SONGS_DIR + oldest, (error) => {
+                        if (error) console.log(`error 29: ${error.message}`)
+                    })
+                }
+            })
         })
     },
     latest() {

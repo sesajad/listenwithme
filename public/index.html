@@ -29,7 +29,7 @@
                     }
                     if (this.response != state) {
                         state = this.response
-                        document.getElementById("source").setAttribute("src", `songs/${state}.mp3`)
+                        document.getElementById("source").setAttribute("src", `songs/${state}.m4a`)
                         document.getElementById("song").onended = () => {
                             document.getElementById("song").className = "hidden"
                             document.getElementById("loading").className = ""
