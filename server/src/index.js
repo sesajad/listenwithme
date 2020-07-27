@@ -16,7 +16,7 @@ const songs = {
         if (this.lock)
             return false
         this.lock = true
-        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o tmp.mp3`
+        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "https://music.youtube.com/watch?v=${x}" -o tmp.mp3`
         let cmd_2 = `cp tmp.mp3 ${SONGS_DIR}${x}.webm`
         exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
