@@ -51,4 +51,4 @@ app.get('/inform', (req, res) => {
 app.get('/latest', (req, res) => res.send(songs.latest()))
 app.use('/', express.static('public'))
 app.use('/songs', express.static('songs'))
-app.listen(port, () => console.log(`app is listening at http://localhost:${port} with secret "${secret}"`))
+app.listen(port, () => console.log(`app is listening at http://localhost:${port} with secret "${SECRET}"`))
