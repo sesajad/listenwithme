@@ -15,13 +15,13 @@ const songs = {
     add(x) {
         if (this.lock)
             return false
-            // todo handle this case
         this.lock = true
-        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 ${x} -o tmp.mp3`
+        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o tmp.mp3`
         let cmd_2 = `cp tmp.mp3 ${SONGS_DIR}${x}.webm`
         exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error 19: ${error.message}`)
+                this.lock = false
                 return
             }
             if (stderr) {
@@ -31,6 +31,7 @@ const songs = {
             exec(cmd_2, (error, stdout, stderr) => {
                 if (error) {
                     console.log(`error 17: ${error.message}`)
+                    this.lock = false
                     return
                 }
                 if (stderr) {
@@ -50,6 +51,7 @@ const songs = {
                 this.lock = false
             })
         })
+        return true
     },
     latest() {
         if (this.list.length == 0)
@@ -63,8 +65,10 @@ app.get('/healthz', (req, res) => res.send('Still Alive!'))
 
 app.get('/inform', (req, res) => {
     if (req.query.secret == SECRET) {
-        songs.add(req.query.id)
-        res.send('ok')
+        if (songs.add(req.query.id))
+            res.send('okey')
+        else
+            res.send('nokey')
     } else {
         res.status(403)
         res.send('you are a lier')

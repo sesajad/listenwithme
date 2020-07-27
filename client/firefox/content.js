@@ -24,9 +24,11 @@ function send() {
 
 function repeater() {
     console.log("hi!")
-    if (window.location.search != lastParam)
+    if (window.location.search != lastParam) {
+        lastParam = window.location.search
         send()
-    setTimeout(10000, repeater)
+    }
+    setTimeout(repeater, 10000)
 }
 
 repeater()
