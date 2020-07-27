@@ -12,8 +12,8 @@ const SONGS_DIR = 'songs/'
 const songs = {
     list: ['nothing'],
     add(x) {
-        let cmd_1 = `youtube-dl -i --extract-audio --audio-format m4a --audio-quality 0 "${x}" -o tmp.mp3`
-        let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}/${x}.mp3`
+        let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 "${x}" -o tmp.mp3`
+        let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}${x}.mp3`
         exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error 19: ${error.message}`)
@@ -23,6 +23,7 @@ const songs = {
                 console.log(`stderr: ${stderr}`)
                 return
             }
+            console.log(`stdout: ${stdout}`)
             exec(cmd_2, (error, stdout, stderr) => {
                 if (error) {
                     console.log(`error 17: ${error.message}`)
