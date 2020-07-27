@@ -55,7 +55,7 @@ const songs = {
         if (this.list.length == 0)
             return 'nothing'
         else
-            return `${SONGS_DIR}${this.list[this.list.length - 1]}.mp3`
+            return `${SONGS_DIR}${this.list[this.list.length - 1]}.webm`
     }
 }
 
