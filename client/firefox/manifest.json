@@ -9,6 +9,7 @@
   },
 
   "permissions": [
+    "*://sesajad.me/*",
     "*://*.youtube.com/*",
     "webRequest",
     "webNavigation",

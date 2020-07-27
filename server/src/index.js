@@ -11,9 +11,14 @@ const SONGS_DIR = 'songs/'
 
 const songs = {
     list: [],
+    lock: false,
     add(x) {
+        if (this.lock)
+            return false
+            // todo handle this case
+        this.lock = true
         let cmd_1 = `youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 ${x} -o tmp.mp3`
-        let cmd_2 = `ffmpeg -i tmp.mp3 ${SONGS_DIR}${x}.mp3`
+        let cmd_2 = `cp tmp.mp3 ${SONGS_DIR}${x}.webm`
         exec(cmd_1, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error 19: ${error.message}`)
@@ -42,6 +47,7 @@ const songs = {
                         if (error) console.log(`error 29: ${error.message}`)
                     })
                 }
+                this.lock = false
             })
         })
     },
