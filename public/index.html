@@ -21,7 +21,7 @@
             var state = "nothing"
             function load() {
                 var request = new XMLHttpRequest();
-                request.open('GET', '/latest', true);
+                request.open('GET', 'latest', true);
                 request.onload = function() {
                     if (this.status != 200) {
                         console.log("error 27")
@@ -29,7 +29,7 @@
                     }
                     if (this.response != state) {
                         state = this.response
-                        document.getElementById("source").setAttribute("src", `/songs/${x}.mp3`)
+                        document.getElementById("source").setAttribute("src", `songs/${x}.mp3`)
                         document.getElementById("audio").onended = () => {
                             document.getElementById("song").className = "hidden"
                             document.getElementById("loading").className = ""
