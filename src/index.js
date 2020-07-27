@@ -5,7 +5,7 @@ const { unlink } = require('fs')
 
 const app = express()
 const port = process.env.PORT
-const SECRET = post.env.SECRET
+const SECRET = process.env.SECRET
 
 const SONGS_DIR = 'songs/'
 
