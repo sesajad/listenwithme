@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Listen with me</title>
+    </head>
+    <style>
+        .hidden {
+            display : none;
+        }
+        body {
+            background-color: #212121;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 30%;
+        }
+        #loading {
+            font-size: 4em;
+        }
+    </style>
+    <body>
+        <script lang="javascript">
+            var state = "nothing"
+            function load() {
+                var request = new XMLHttpRequest();
+                request.open('GET', '/latest', true);
+                request.onload = function() {
+                    if (this.status != 200) {
+                        console.log("error 27")
+                        return
+                    }
+                    if (this.response != state) {
+                        state = this.response
+                        document.getElementById("source").setAttribute("src", `/songs/${x}.mp3`)
+                        document.getElementById("audio").onended = () => {
+                            document.getElementById("song").className = "hidden"
+                            document.getElementById("loading").className = ""
+                            load()
+                        }
+                        document.getElementById("song").className = ""
+                        document.getElementById("loading").className = "hidden"
+                    } else {
+                        setTimeout(load, 10000);
+                    }
+                }
+                request.onerror = function() {
+                    console.log("error 45");
+                }
+                request.send();
+            }
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                load();
+            });
+        </script>
+        <div id="loading">Loading</div>
+        <audio id="song" class="hidden" controls>
+            <source id="source" src="" type="audio/mpeg">
+        </audio>
+    </body>
+</html>
