@@ -21,7 +21,6 @@ const songs = {
             }
             if (stderr) {
                 console.log(`stderr: ${stderr}`)
-                return
             }
             console.log(`stdout: ${stdout}`)
             exec(cmd_2, (error, stdout, stderr) => {
@@ -31,7 +30,6 @@ const songs = {
                 }
                 if (stderr) {
                     console.log(`stderr: ${stderr}`)
-                    return
                 }
                 console.log(`stdout: ${stdout}`)
                 this.list.push(x)

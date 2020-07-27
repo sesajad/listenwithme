@@ -29,14 +29,18 @@
                     }
                     if (this.response != state) {
                         state = this.response
-                        document.getElementById("source").setAttribute("src", `songs/${state}.m4a`)
-                        document.getElementById("song").onended = () => {
-                            document.getElementById("song").className = "hidden"
-                            document.getElementById("loading").className = ""
+                        let song = document.getElementById("song")
+                        let source = document.getElementById("source")
+                        let loading = document.getElementById("loading")
+                        source.setAttribute("src", `songs/${state}.m4a`)
+                        song.play()
+                        song.onended = () => {
+                            song.className = "hidden"
+                            loading.className = ""
                             load()
                         }
-                        document.getElementById("song").className = ""
-                        document.getElementById("loading").className = "hidden"
+                        song.className = ""
+                        loading.className = "hidden"
                     } else {
                         setTimeout(load, 10000);
                     }
