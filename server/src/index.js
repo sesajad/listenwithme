@@ -44,7 +44,7 @@ const songs = {
                 this.list.push(x)
                 if (this.list.length > 2) {
                     let oldest = this.list.shift()
-                    unlink(`${SONGS_DIR}${oldest}.mp3`, (error) => {
+                    unlink(`${SONGS_DIR}${oldest}.webm`, (error) => {
                         if (error) console.log(`error 29: ${error.message}`)
                     })
                 }
